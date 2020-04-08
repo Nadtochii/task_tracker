@@ -1,0 +1,15 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'todoapp/style.css' %}">
+    </head>
+    <body>
+        {% if tasks %}
+            <ul>
+            {% for task in tasks %}
+                <li><a href="{% url 'todoapp:detail' task.id %}">{{ task.name }}</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </body>
+</html>

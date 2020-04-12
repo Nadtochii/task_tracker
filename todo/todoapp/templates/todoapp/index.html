@@ -1,15 +1,28 @@
-{% load static %}
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'todoapp/style.css' %}">
-    </head>
-    <body>
-        {% if tasks %}
-            <ul>
-            {% for task in tasks %}
-                <li><a href="{% url 'todoapp:detail' task.id %}">{{ task.name }}</a></li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    </body>
-</html>
+{% extends 'todoapp/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <h2>Make it done</h2>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if tasks %}
+                    {% for task in tasks %}
+                        <tr>
+                            <td><a href="{% url 'todoapp:detail' task.id %}">{{ task.name }}</a></td>
+                            <td>{{ task.priority }}</td>
+                            <td><button type="button" class="btn btn-success">Done</button></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

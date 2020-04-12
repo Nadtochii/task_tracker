@@ -13,15 +13,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% if tasks %}
-                    {% for task in tasks %}
-                        <tr>
-                            <td><a href="{% url 'todoapp:detail' task.id %}">{{ task.name }}</a></td>
-                            <td>{{ task.priority }}</td>
-                            <td><button type="button" class="btn btn-success">Done</button></td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
+                {% for task in object_list %}
+                    <tr>
+                        <td><a href="{% url 'todoapp:detail' task.id %}">{{ task.name }}</a></td>
+                        <td>{{ task.priority }}</td>
+                        <td><button type="button" class="btn btn-success">Done</button></td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

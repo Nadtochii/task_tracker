@@ -1,5 +1,6 @@
 {% extends 'todoapp/base.html' %}
+{% load rest_framework %}
 
 {% block content %}
-    {{ task.name }}
+    {{ name }} - {{ description }}
 {% endblock %}

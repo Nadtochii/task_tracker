@@ -1,8 +1,9 @@
-from django.http import HttpResponse, Http404
-from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.views.generic import ListView
+from rest_framework import viewsets
+from rest_framework.renderers import TemplateHTMLRenderer
 
 from .models import Task
+from .serializers import TaskSerializer
 
 
 class IndexView(ListView):
@@ -10,6 +11,8 @@ class IndexView(ListView):
     template_name = 'todoapp/index.html'
 
 
-class TaskDetailView(DetailView):
-    model = Task
+class TaskViewSet(viewsets.ModelViewSet):
+    renderer_classes = [TemplateHTMLRenderer]
+    serializer_class = TaskSerializer
+    queryset = Task.objects.all()
     template_name = 'todoapp/detail.html'

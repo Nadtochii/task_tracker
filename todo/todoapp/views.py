@@ -25,6 +25,6 @@ def create_task(request):
         name = request.POST.get('name')
         priority = request.POST.get('priority')
         description = request.POST.get('description')
-        task = Task.objects.create(name=name, priority=priority, description=description)
+        Task.objects.create(name=name, priority=priority, description=description)
 
-        return redirect('/todoapp/' + str(task.id) + '/')
+        return redirect('/todoapp/')

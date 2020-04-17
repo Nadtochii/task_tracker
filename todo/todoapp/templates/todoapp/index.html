@@ -2,54 +2,69 @@
 
 {% block content %}
     <div class="container">
-        <br>
-        <h2>Make it done</h2>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in object_list %}
-                    <tr>
-                        <td><a href="/todoapp/{{ task.id }}/">{{ task.name }}</a></td>
-                        <td>{{ task.priority }}</td>
-                        <td>
-                            <form action="{% url 'todoapp:delete_task' task.id %}" method="POST">
+        <h2 class="card-title">Make it done</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Priority</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in object_list %}
+                                    <tr>
+                                        <td><a href="/todoapp/{{ task.id }}/">{{ task.name }}</a></td>
+                                        <td>{{ task.priority }}</td>
+                                        <td>
+                                            <form action="{% url 'todoapp:delete_task' task.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-success">Done</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="contaier">
+                            <form action="/todoapp/create/" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-success">Done</button>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="priority">Prioryty</label>
+                                    <select class="form-control" id="priority" name="priority">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <div class="contaier">
-        <form action="/todoapp/create/" method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="priority">Prioryty</label>
-                <select class="form-control" id="priority" name="priority">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" rows="3" name="description"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+
+        </div>
     </div>
 {% endblock %}

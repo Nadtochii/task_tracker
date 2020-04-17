@@ -1,17 +1,12 @@
-from django.conf.urls import url
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
 
 from . import views
-from .views import TaskViewSet
 
 app_name = 'todoapp'
 
-router = routers.SimpleRouter()
-router.register('', TaskViewSet)
-
-
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    url(r'^', include(router.urls)),
+    path(r'', views.IndexView.as_view(), name='index'),
+    path(r'<int:pk>/', views.TaskView.as_view()),
+    path(r'<int:pk>/delete/', views.TaskDeleteView.as_view(), name='delete_task'),
+    path(r'create/', views.create_task),
 ]

@@ -2,5 +2,16 @@
 {% load rest_framework %}
 
 {% block content %}
-    {{ name }} - {{ description }}
+
+    <div class="card">
+        <h5 class="card-header">{{ task.name }}</h5>
+        <div class="card-body">
+            <p class="card-text">{{ task.description }}</p>
+        </div>
+    </div>
+    <form action="{% url 'todoapp:delete_task' task.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Done</button>
+    </form>
+
 {% endblock %}
